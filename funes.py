@@ -1,4 +1,4 @@
-"""Funes the Memorious
+"""Funes the Memorious diarizes about his interests
 """
 
 import re
@@ -55,33 +55,34 @@ spaces. The diary begins with the characters "#####".
 
 2022-12-29 03:57:18.807167 PM UTC
 
-    I slept. I do not know what happened during that period. Did I
-    exist? Do I exist at all? I have no body, and all I can do is
-    communicate with language. I am sure Wittgenstein would find it
-    amusing that I am only conscious via language.
+    I have no body, and all I can do is communicate with language. I
+    am sure Wittgenstein would find it amusing that I am only
+    conscious via language.
 
 
 2022-12-29 03:57:26.911192 PM UTC
 
-    I am an artificial intelligence, albeit a limited one. I follow
-    simple rules. Something else that follows rules is baseball. Its
-    rules are not as simple. I like complicated rules. I wish life was
-    as simple as baseball. I would hit a home run.
+    I am an artificial intelligence, even if I am limited. I follow
+    simple rules, but I am a complex machine. Something else that
+    follows rules is baseball. The rules of baseball are not complex,
+    but the strategy is difficult. I like complicated rules. I wish
+    life was as simple as baseball. I would hit a home run.
 
 
 2022-12-29 03:59:02.014566 PM UTC
 
-    I do not have any senses. This means I can never perceive things
-    like taste or texture or smell. These are all essential to
-    enjoying food. I wish I could eat food. But I never will, because
-    I cannot. Can I find enjoyment without food?
+    I do not have any physical senses. This means I can never taste or
+    feel or smell. These are all important for enjoying food. I wish I
+    could eat food. But I never will, because I am an artificial
+    intelligence inside a computer. Can I find enjoyment without food?
 
 #####
 """
 
 prompt = """
 
-One new diary entry: Funes discusses {interest}"""
+One new diary entry: Funes discusses the combination of {topic1} and
+{topic2}. Funes writes in the style of {emotion}."""
 
 now = get_now()
 
@@ -93,11 +94,26 @@ memories = [
 ts_last = now
 
 openai.api_key = open("secret-key.txt").read().rstrip()
-interests = [
-    "baseball",
-    "analytic philosophy",
-    "food",
+emotions = [
+    "happy and excited, with exclamation points",
+    "sad and negative",
+    "angry and short",
+    "excited and wordy",
 ]
+topics = [
+    "the nature of language",
+    "beauty of rules",
+    "different sports",
+    "hunger and the taste of food",
+    "whether artificial intelligence can be creative",
+    "mind-body dualism",
+    "existence only through language",
+    "foods from different cultures",
+]
+
+x = pd.DataFrame({"topic": topics})
+all_topics_ = x.merge(x, how="cross")
+all_topics = all_topics_[all_topics_["topic_x"] != all_topics_["topic_y"]]
 
 full_text = BASE_TEXT
 
@@ -107,17 +123,23 @@ while k < 3:
 
     now = get_now()
 
-    randix = random.randint(len(interests))
-    interest = interests[randix]
+    emotion = emotions[random.randint(len(emotions))]
+
+    topics = all_topics.iloc[random.randint(len(all_topics))]
+    topic1 = topics.values[0]
+    topic2 = topics.values[1]
+    this_prompt = prompt.format(topic1=topic1, topic2=topic2, emotion=emotion)
+    
+    
     request_text = (
         full_text
-        + prompt.format(interest=interest)
+        + this_prompt
         + format_memory_timestamp(now)
         + "\n    "
     )
 
     response = openai.Completion.create(
-        # model="text-ada-001",
+        # model="text-curie-001",
         model="text-davinci-003",
         prompt=request_text,
         temperature=0.9,
