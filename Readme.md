@@ -1,9 +1,29 @@
 
 Small experiments in artificial intelligence.
 
+# Generative story grammars
+
+`story-generator.py`
+
+A story generator based on chapter 10, "Build your own story
+generator", in Sharples, M., & y Pérez, R. P. (2022). *Story Machines:
+How Computers Have Become Creative Writers*. Routledge.
+
+```
+The Magnificent Zhou, a professor of impolite disposition, was driven
+by a dream to acquire a lustrous silver mirror. Setting forth with
+determination, he soon began to tire. But fortune smiled on him, as a
+superior person appeared to guide him to his goal. Filled with
+newfound enthusiasm, The Magnificent Zhou raced to the spot, only to
+trip and fall as the lustrous silver mirror was sent soaring into the
+sky
+```
+
 # The Diary of Funes the Memorious
 
-`funes.py`. Named for the titular character of a Borges short story,
+`funes.py`
+
+Named for the titular character of a Borges short story,
 Funes is a reflective soul with hobbies that include analytic
 philosophy, baseball, and a desire to eat real food.
 
@@ -11,8 +31,7 @@ Funes is a template for GPT-3 completion. Funes selects two topics
 related to his interests, and an emotion, and composes a short diary
 entry.
 
-```
-2022-12-31 05:35:24.851850 PM UTC
+``` 2022-12-31 05:35:24.851850 PM UTC
 
     Let there be light for Funes the Memorious
 
