@@ -9,6 +9,11 @@ A story generator based on chapter 10, "Build your own story
 generator", in Sharples, M., & y Pérez, R. P. (2022). *Story Machines:
 How Computers Have Become Creative Writers*. Routledge.
 
+First, a story grammar is parsed and populated---similar to a Mad Libs
+story generator. The descriptions are embellished using GPT-3 to sound
+"very descriptive". The resulting story is passed through GPT-3 a
+second time to fix grammar.
+
 ```
 The Magnificent Zhou, a professor of impolite disposition, was driven
 by a dream to acquire a lustrous silver mirror. Setting forth with
