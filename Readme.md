@@ -1,6 +1,10 @@
 
 Small experiments in artificial intelligence.
 
+# GPT Chat Client
+
+`gpt4.py`
+
 # Generative story grammars
 
 `story-generator.py`
